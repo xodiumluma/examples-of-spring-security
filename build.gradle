@@ -1,7 +1,7 @@
 plugins {
 	id "checkstyle"
 	id "io.spring.javaformat" version "0.0.25"
-	id 'io.spring.nohttp' version '0.0.5.RELEASE'
+	id 'io.spring.nohttp' version '0.0.11'
 }
 
 allprojects {
@@ -19,6 +19,11 @@ allprojects {
 				throw new IllegalStateException("No tests were found. Ensure that useJUnitPlatform was used.")
 			}
 		}
+	}
+
+	// Spring Framework 6.1 requires -parameters to be able to introspect method parameter names
+	tasks.withType(JavaCompile) {
+		options.compilerArgs.add("-parameters")
 	}
 }
 

@@ -21,10 +21,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * OAuth resource configuration.
@@ -47,7 +48,7 @@ public class OAuth2ResourceServerSecurityConfiguration {
 						.requestMatchers(HttpMethod.POST, "/message/**").hasAuthority("SCOPE_message:write")
 						.anyRequest().authenticated()
 				)
-				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+				.oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()));
 		// @formatter:on
 		return http.build();
 	}
