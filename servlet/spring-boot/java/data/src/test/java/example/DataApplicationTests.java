@@ -37,9 +37,48 @@ public class DataApplicationTests {
 
 	@Test
 	@WithMockUser("rob")
-	void findAllOnlyToCurrentUser() {
+	void findAllOnlyToCurrentUserCantReadMessage() {
 		List<Message> messages = this.repository.findAll();
 		assertThat(messages).hasSize(3);
+		for (Message message : messages) {
+			assertThat(message.getSummary()).isNull();
+			assertThat(message.getText()).isNull();
+		}
+	}
+
+	@Test
+	@WithMockUser(username = "rob", authorities = "message:read")
+	void findAllOnlyToCurrentUserCanReadMessage() {
+		List<Message> messages = this.repository.findAll();
+		assertThat(messages).hasSize(3);
+		for (Message message : messages) {
+			assertThat(message.getSummary()).isNotNull();
+			assertThat(message.getText()).isNotNull();
+		}
+	}
+
+	@Test
+	@WithMockUser(username = "rob", authorities = "message:read")
+	void findAllOnlyToCurrentUserCantReadUserDetails() {
+		List<Message> messages = this.repository.findAll();
+		assertThat(messages).hasSize(3);
+		for (Message message : messages) {
+			User user = message.getTo();
+			assertThat(user.getFirstName()).isNull();
+			assertThat(user.getLastName()).isNull();
+		}
+	}
+
+	@Test
+	@WithMockUser(username = "rob", authorities = { "message:read", "user:read" })
+	void findAllOnlyToCurrentUserCanReadUserDetails() {
+		List<Message> messages = this.repository.findAll();
+		assertThat(messages).hasSize(3);
+		for (Message message : messages) {
+			User user = message.getTo();
+			assertThat(user.getFirstName()).isNotNull();
+			assertThat(user.getLastName()).isNotNull();
+		}
 	}
 
 }

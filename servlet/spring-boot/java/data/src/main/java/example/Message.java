@@ -18,14 +18,18 @@ package example;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+
+import org.springframework.security.authorization.method.AuthorizeReturnObject;
 
 @Entity
+@JsonSerialize(as = Message.class)
+@AuthorizeReturnObject
 public class Message {
 
 	@Id
@@ -65,6 +69,7 @@ public class Message {
 		this.created = created;
 	}
 
+	@AuthorizeRead("message")
 	public String getText() {
 		return this.text;
 	}
@@ -73,6 +78,7 @@ public class Message {
 		this.text = text;
 	}
 
+	@AuthorizeRead("message")
 	public String getSummary() {
 		return this.summary;
 	}

@@ -16,9 +16,9 @@
 
 package example;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 /**
@@ -26,7 +26,8 @@ import jakarta.persistence.Id;
  *
  * @author Rob Winch
  */
-@Entity(name="users")
+@Entity(name = "users")
+@JsonSerialize(as = User.class, contentUsing = JsonSerializer.class)
 public class User {
 
 	@Id
@@ -48,6 +49,7 @@ public class User {
 		this.id = id;
 	}
 
+	@AuthorizeRead("user")
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -56,6 +58,7 @@ public class User {
 		this.firstName = firstName;
 	}
 
+	@AuthorizeRead("user")
 	public String getLastName() {
 		return this.lastName;
 	}
