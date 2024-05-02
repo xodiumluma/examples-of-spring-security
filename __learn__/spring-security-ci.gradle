@@ -1,0 +1,7 @@
+allprojects {
+  configurations.all {
+    resolutionStrategy {
+      force "org.springframework.security:spring-security-acl:$springSecurityVersion"
+    }
+  }
+}
