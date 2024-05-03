@@ -2,6 +2,13 @@ allprojects {
   configurations.all {
     resolutionStrategy {
       force "org.springframework.security:spring-security-acl:$springSecurityVersion"
+      force "org.springframework.security:spring-security-aspects:$springSecurityVersion",
+      force "org.springframework.security:spring-security-bom:$springSecurityVersion",
+      force "org.springframework.security:spring-security-cas:$springSecurityVersion",
+      force "org.springframework.security:spring-security-config:$springSecurityVersion",
+      force "org.springframework.security:spring-security-core:$springSecurityVersion",
+      force "org.springframework.security:spring-security-crypto:$springSecurityVersion",
+      force "org.springframework.security:spring-security-data:$springSecurityVersion",
     }
   }
 }
