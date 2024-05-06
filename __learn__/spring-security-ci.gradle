@@ -9,6 +9,13 @@ allprojects {
       force "org.springframework.security:spring-security-core:$springSecurityVersion",
       force "org.springframework.security:spring-security-crypto:$springSecurityVersion",
       force "org.springframework.security:spring-security-data:$springSecurityVersion",
+      force "org.springframework.security:spring-security-ldap:$springSecurityVersion",
+      force "org.springframework.security:spring-security-messaging:$springSecurityVersion",
+      force "org.springframework.security:spring-security-oauth2-client:$springSecurityVersion",
+      force "org.springframework.security:spring-security-oauth2-core:$springSecurityVersion",
+      force "org.springframework.security:spring-security-oauth2-jose:$springSecurityVersion",
+      force "org.springframework.security:spring-security-oauth2-resource-server:$springSecurityVersion",
+      force "org.springframework.security:spring-security-oauth2-openid:$springSecurityVersion",
     }
   }
 }
