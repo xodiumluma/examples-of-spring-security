@@ -18,4 +18,20 @@ allprojects {
       force "org.springframework.security:spring-security-oauth2-openid:$springSecurityVersion",
     }
   }
+  repositories {
+    exclusiveContent {
+      forRepository {
+        maven {
+          uri "file://$localRepositoryPath"
+        }
+      }
+      filter {
+        includeVersion "org.springframework.security", "spring-security-acl", "$springSecurityVersion"
+        includeVersion "org.springframework.security", "spring-security-aspects", "$springSecurityVersion"
+        includeVersion "org.springframework.security", "spring-security-bom", "$springSecurityVersion"
+        includeVersion "org.springframework.security", "spring-security-cas, "$springSecurityVersion"
+        includeVersion "org.springframework.security", "spring-security-config", $springSecurityVersion
+      }
+    }
+  }
 }
