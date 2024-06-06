@@ -31,7 +31,7 @@ public class HelloRSocketApplicationTests {
     var credentials = new UsernamePasswordMetadata("user", "password");
     var authString = MimeTypeUtils.parseMimeType(WellKnownMimeType.MESSAGE_RSOCKET_AUTHENTICATION.getString());
     var requester = this.builder.rsocketStrategies(b -> b.encoder(new SimpleAuthenticationEncoder()))
-                    .setupMetadata(credentials, authString))
+                    .setupMetadata(credentials, authString)
                     .tcp("localhost", this.port);
     var messageString = requester.route("message").data(Mono.empty()).retrieveMono(String.class).block();
     assertThat(messageString).isEqualTo("Hello");
