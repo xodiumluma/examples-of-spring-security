@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.rsocket.server.LocalRSocketServerPort;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.security.rsocket.metadata.SimpleAuthenticationEncoder;
-import org.springframework.security.roskcet.metadata.UsernamePasswordMetadata;
+import org.springframework.security.rsocket.metadata.UsernamePasswordMetadata;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.MimeTypeUtils;
 
@@ -39,7 +39,7 @@ public class HelloRSocketApplicationTests {
 
   @Test
   void messageWhenNotAuthenticatedThenError() {
-    var requester = this.requester.tcp("localhost", this.port);
+    var requester = this.builder.tcp("localhost", this.port);
     assertThatThrownBy(() -> requester.route("message")
       .data(Mono.empty())
       .retrieveMono(String.class)
